@@ -125,6 +125,12 @@ public class ParenthesesCheckerTest {
         assertFalse(checker.checkParentheses(testString));
     }
 
+    @Test
+    public void failsIfWronglyEmbedded(){
+        String testString = "(<)>";
+        assertFalse(checker.checkParentheses(testString));
+    }
+
 
     // EXTENSION TESTS
 

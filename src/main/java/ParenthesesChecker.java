@@ -43,28 +43,48 @@ public class ParenthesesChecker {
                     }
                     countOpenNorm += 1;
                 }
-                case ')' -> countCloseNorm += 1;
+                case ')' -> {
+                    if (brackets.peek() == '<' || brackets.peek() == '{' || brackets.peek() == '['){
+                        return false;
+                    }
+                    countCloseNorm += 1;
+                }
                 case '[' -> {
                     if (countCloseSqr == 0) {
                         return false;
                     }
                     countOpenSqr += 1;
                 }
-                case ']' -> countCloseSqr += 1;
+                case ']' -> {
+                    if (brackets.peek() == '<' || brackets.peek() == '(' || brackets.peek() == '{'){
+                        return false;
+                    }
+                    countCloseSqr += 1;
+                }
                 case '{' -> {
                     if (countCloseCurl == 0) {
                         return false;
                     }
                     countOpenCurl += 1;
                 }
-                case '}' -> countCloseCurl += 1;
+                case '}' -> {
+                    if (brackets.peek() == '<' || brackets.peek() == '(' || brackets.peek() == '['){
+                        return false;
+                    }
+                    countCloseCurl += 1;
+                }
                 case '<' -> {
                     if (countCloseCorn == 0) {
                         return false;
                     }
                     countOpenCorn += 1;
                 }
-                case '>' -> countCloseCorn += 1;
+                case '>' -> {
+                    if (brackets.peek() == '(' || brackets.peek() == '{' || brackets.peek() == '['){
+                        return false;
+                    }
+                    countCloseCorn += 1;
+                }
             }
         }
 
